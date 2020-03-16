@@ -36,11 +36,12 @@ public class MazeMaker{
 		currentCell.setBeenVisited(true);
 		//B. Get an ArrayList of unvisited neighbors using the current cell and the method below
 		
-		ArrayList unvisitedNeighborsList = getUnvisitedNeighbors(currentCell);
+		ArrayList<Cell> unvisitedNeighborsList = getUnvisitedNeighbors(currentCell);
 		
 		//C. if has unvisited neighbors,
+		
 		if(unvisitedNeighborsList.isEmpty() == false) {
-			Cell selection = maze.getCell(randGen.nextInt(unvisitedNeighborsList.size()), randGen.nextInt(unvisitedNeighborsList.size()));
+			Cell selection = unvisitedNeighborsList.get(randGen.nextInt(unvisitedNeighborsList.size()));
 			uncheckedCells.push(selection);
 			removeWalls(selection, currentCell);
 			currentCell = selection;
@@ -102,16 +103,16 @@ public class MazeMaker{
 	//   to the ArrayList
 	private static ArrayList<Cell> getUnvisitedNeighbors(Cell c) {
 		ArrayList<Cell> unvisited = new ArrayList<Cell>();
-		if(maze.getCell(c.getX()+1, c.getY()).hasBeenVisited() == false && c.getX() < width) {
+		if(c.getX()+1 < width && maze.getCell(c.getX()+1, c.getY()).hasBeenVisited() == false) {
 			unvisited.add(maze.getCell(c.getX()+1, c.getY()));
 		}
-		else if(maze.getCell(c.getX(), c.getY()+1).hasBeenVisited() == false && c.getY() < height) {
+		else if(c.getY()+1 < height && maze.getCell(c.getX(), c.getY()+1).hasBeenVisited() == false) {
 			unvisited.add(maze.getCell(c.getX(), c.getY()+1));
 		}
-		else if(maze.getCell(c.getX()-1, c.getY()).hasBeenVisited() == false && c.getX() > 0) {
+		else if(c.getX()-1 > 0 && maze.getCell(c.getX()-1, c.getY()).hasBeenVisited() == false) {
 			unvisited.add(maze.getCell(c.getX()-1, c.getY()));
 		}
-		else if(maze.getCell(c.getX(), c.getY()-1).hasBeenVisited() == false && c.getY() > 0) {
+		else if(c.getY()-1 > 0 && maze.getCell(c.getX(), c.getY()-1).hasBeenVisited() == false) {
 			unvisited.add(maze.getCell(c.getX(), c.getY()-1));
 		}
 		

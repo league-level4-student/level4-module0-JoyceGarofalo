@@ -11,16 +11,12 @@ public class Maze {
 		this.width = w;
 		this.height = h;
 
-		//2. Initialize the cells using the width and height varibles
-		for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
-				cells[i][j] = new Cell(width, height);
-			}
-		}
+		//2. Initialize the cells using the width and height variables
+		cells = new Cell[width][height];
 		//3. Iterated through each cell and initialize it
 		//   using i and j as the location
 		for (int i = 0; i < cells.length; i++) {
-			for (int j = 0; j < cells.length; j++) {
+			for (int j = 0; j < cells[0].length; j++) {
 				cells[i][j] = new Cell(i,j);
 			}
 		}
@@ -34,7 +30,7 @@ public class Maze {
 	
 	//4b. This method returns the selected cell.
 	public Cell getCell(int x, int y){
-		return  null;
+		return  cells[x][y];
 	}
 
 	public int getWidth() {
