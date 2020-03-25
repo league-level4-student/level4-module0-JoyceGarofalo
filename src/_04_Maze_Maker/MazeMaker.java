@@ -83,18 +83,23 @@ public class MazeMaker{
 	//   This method will check if c1 and c2 are adjacent.
 	//   If they are, the walls between them are removed.
 	private static void removeWalls(Cell c1, Cell c2) {
-		if(c1.getX()+1 == c2.getX() && c1.getY() == c2.getY() && c1.getX()+1 < width) {
+		if(c1.getX()+1 == c2.getX() && c1.getY() == c2.getY()) {
 			c1.setEastWall(false);
+			c2.setWestWall(false);
 		}
-		else if(c1.getX() == c2.getX() && c1.getY()+1 == c2.getY() && c1.getY()+1 < height){
-			c1.setSouthWall(false);
-		}
-		else if(c1.getX()-1 == c2.getX() && c1.getY() == c2.getY() && c1.getX()-1 > 0) {
+		else if(c1.getX()-1 == c2.getX() && c1.getY() == c2.getY()){
 			c1.setWestWall(false);
+			c2.setEastWall(false);
 		}
-		else if(c1.getX() == c2.getX() && c1.getY()-1 == c2.getY() && c1.getY() > 0) {
+		else if(c1.getX() == c2.getX() && c1.getY()+1 == c2.getY()){
+			c1.setSouthWall(false);
+			c2.setNorthWall(false);
+		}
+		else if(c1.getX() == c2.getX() && c1.getY()-1 == c2.getY()){
 			c1.setNorthWall(false);
+			c2.setSouthWall(false);
 		}
+		
 		
 	}
 	
