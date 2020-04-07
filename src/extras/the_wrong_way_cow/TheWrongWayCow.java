@@ -47,6 +47,7 @@ public class TheWrongWayCow {
     public static int[] findWrongWayCow(final char[][] field) {
         // Fill in the code to return the x,y coordinate position of the
         // head (letter 'c') of the wrong way cow!
+    	/*
     	int midind = 0;
     	int lastind = 0;
     	int wrongind = 0;
@@ -54,7 +55,7 @@ public class TheWrongWayCow {
     	String direction = null;
     	
         for (int i = 0; i < field.length; i++) {
-			for (int j = 0; j < field.length; j++) {
+			for (int j = 0; j < field[0].length; j++) {
 				
 				//if direction is right
 				if(field[i][j] == 'c') {
@@ -69,7 +70,7 @@ public class TheWrongWayCow {
 					for (int y = 0; y < field.length; y++) {
 						if(field[midind+y][j] == 'w') {
 							lastind = midind+y;
-							direction.equals("right");
+							direction = "right";
 							
 						}
 					}
@@ -93,7 +94,73 @@ public class TheWrongWayCow {
 				
 			}
 		}
-        
-        return null;
+		*/
+    	String direction = null;
+    	int r = 0;
+    	int l = 0;
+    	int u = 0;
+    	int d = 0;
+    	int[] rightC = null;
+    	int[] leftC = null;
+    	int[] upC = null;
+    	int[] downC = null;
+    	//int up = 0;
+    	for (int x = 0; x < field.length; x++) {
+			for (int y = 0; y < field[0].length; y++) {
+				if(field[x][y] == 'c') {
+					if(field.length > x+2 && field[x+1][y] == 'o' && field[x+2][y] == 'w') {
+						direction = "down";
+						d++;
+						downC = new int[] {y, x};
+					}
+					else if(x-2 > 0 && field[x-1][y] == 'o' && field[x-2][y] == 'w') {
+						direction = "up";
+						u++;
+						upC = new int[] {y, x};
+						//up = x;
+					}
+					else if(y-2 > 0 && field[x][y-1] == 'o' && field[x][y-2] == 'w') {
+						direction = "left";
+						l++;
+						leftC = new int[] {y, x};
+					}
+					else if(y+2 < field[0].length && field[x][y+1] == 'o' && field[x][y+2] == 'w') {
+						direction = "right";
+						r++;
+						rightC = new int[] {y, x};
+					}
+				}				
+			}
+		}
+		//System.out.println("hi" + u + " ," + d);
+
+    	//simple
+		if(d < r && d > 0) {
+			return downC;
+		}
+		//ex1
+		if(l < r && l > 0) {
+			return leftC;
+		}
+		//ex2
+		if(r < d && r > 0) {
+			return rightC;
+		}
+		//wwcE
+		if(r < l && r > 0) {
+			return rightC;
+		}
+		//wwcN
+		if(u < d && u > 0) {
+			return upC;
+		}
+		//wwcS
+		if(r < u && r > 0) {
+			return rightC;
+		}
+		
+		
+    	return null;
+    
     }
 }
